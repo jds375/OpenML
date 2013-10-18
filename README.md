@@ -11,3 +11,5 @@ Current algorithms included:
 -Regressive K-Nearest Neighbors
 <br>
 -Primal Perceptron
+<br>
+-Dual Perceptron
