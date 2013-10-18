@@ -9,7 +9,7 @@ import java.util.Map.Entry;
 public class UnweightedKNN {
 
 	private final DataSet trainingSet;
-	private final int k;
+	private int k;
 	private final SimilarityMeasure similarityMeasure;
 
 	public UnweightedKNN(final DataSet trainingSet, final int k,
@@ -33,12 +33,12 @@ public class UnweightedKNN {
 	 * @param voteTable
 	 * @return The label in the vote table with the most votes.
 	 */
-	private double predictedLabel(final HashMap<Double, Integer> voteTable) {
-		Iterator<Entry<Double, Integer>> tableIterator = voteTable.entrySet().iterator();
+	private double predictedLabel(final HashMap<Double, Double> voteTable) {
+		Iterator<Entry<Double, Double>> tableIterator = voteTable.entrySet().iterator();
 		double bestLabel = 0;
 		double mostVotes = 0;
 		while (tableIterator.hasNext()) {
-			Entry<Double, Integer> labelVotePair = tableIterator.next();
+			Entry<Double, Double> labelVotePair = tableIterator.next();
 			if (labelVotePair.getValue() > mostVotes) {
 				bestLabel = labelVotePair.getKey();
 				mostVotes = labelVotePair.getValue();
@@ -52,15 +52,15 @@ public class UnweightedKNN {
 	 *         as keys, which are mapped to the number of times they appear
 	 *         amongst the k nearest neighbors.
 	 */
-	private HashMap<Double, Integer> createVoteTable() {
-		HashMap<Double, Integer> voteTable = new HashMap<Double, Integer>();
+	protected HashMap<Double, Double> createVoteTable() {
+		HashMap<Double, Double> voteTable = new HashMap<Double, Double>();
 		for (int i = 0; i < k; i++) {
 			double kNNLabel = trainingSet.getDataSet()[trainingSet.getDataSet().length
 					- i - 1].getLabel();
 			if (voteTable.containsKey(kNNLabel)) {
 				voteTable.put(kNNLabel, voteTable.get(kNNLabel) + 1);
 			} else {
-				voteTable.put(kNNLabel, 1);
+				voteTable.put(kNNLabel, 1.0);
 			}
 		}
 		return voteTable;
@@ -106,6 +106,10 @@ public class UnweightedKNN {
 
 	public int getK() {
 		return k;
+	}
+	
+	public void setK(final int k) {
+		this.k = k;
 	}
 
 	public SimilarityMeasure getSimilarityMeasure() {

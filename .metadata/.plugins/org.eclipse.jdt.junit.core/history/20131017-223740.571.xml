@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun name="KNNTest" project="OpenML" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="knn.KNNTest" time="0.001">
+    <testcase name="testUnweightedKNN" classname="knn.KNNTest" time="0.001"/>
+    <testcase name="testWeightedKNN" classname="knn.KNNTest" time="0.0"/>
+  </testsuite>
+</testrun>

@@ -1,0 +1,10 @@
+package knn;
+
+public class WeightedKNN extends UnweightedKNN {
+
+	public WeightedKNN(DataSet trainingSet, int k,
+			SimilarityMeasure similarityMeasure) {
+		super(trainingSet, k, similarityMeasure);
+	}
+
+}
