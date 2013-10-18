@@ -5,3 +5,5 @@ An open source project for building Machine Learning algorithms, specifically in
 Current algorithms included:
 <br>
 -Unweighted K-Nearest Neighbors
+<br>
+-Weighted K-Nearest Neighbors
