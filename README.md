@@ -7,3 +7,5 @@ Current algorithms included:
 -Unweighted K-Nearest Neighbors
 <br>
 -Weighted K-Nearest Neighbors
+<br>
+-Regressive K-Nearest Neighbors
