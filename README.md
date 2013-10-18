@@ -9,3 +9,5 @@ Current algorithms included:
 -Weighted K-Nearest Neighbors
 <br>
 -Regressive K-Nearest Neighbors
+<br>
+-Primal Perceptron
