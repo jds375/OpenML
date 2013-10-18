@@ -1,27 +1,25 @@
 package perceptrons;
 
 import utils.JamaUtils;
-import Jama.Matrix;
 
-public class PrimalPerceptron {
+public class DualPerceptron {
 
 	private DataSet trainingSet;
 
-	private Matrix weight;
+	private int[] alpha;
 
 	private double bias = 0;
 
 	private double r = 0;
 
-	public PrimalPerceptron(final DataSet trainingSet) {
+	public DualPerceptron(DataSet trainingSet) {
 		setTrainingSet(trainingSet);
-		setWeight(new Matrix(new double[trainingSet.getDataSet()[0]
-				.getFeatures().getColumnDimension()], 1));
+		setAlpha(new int[trainingSet.getDataSet().length]);
 		calculateR();
 	}
 
 	/**
-	 * Trains the perceptron according to Rosenblat's primal training algorithm.
+	 * Trains the perceptron according to the Dual form.
 	 */
 	public void train() {
 		boolean noError = false;
@@ -30,14 +28,32 @@ public class PrimalPerceptron {
 			for (int i = 0; i < getTrainingSet().getDataSet().length; i++) {
 				FeatureObject trainingObject = getTrainingSet().getDataSet()[i];
 				if (calculateMargin(trainingObject) <= 0) {
-					setWeight(trainingObject.getFeatures()
-							.times(trainingObject.getLabel()).plus(getWeight()));
+					getAlpha()[i] = getAlpha()[i] + 1;
 					setBias(getBias() + trainingObject.getLabel()
 							* Math.pow(getR(), 2));
 					noError = false;
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param object
+	 * @return The margin for the feature vector of this object with the current
+	 *         alpha vector and bias value.
+	 */
+	private double calculateMargin(final FeatureObject object) {
+		double linearCombination = 0;
+		for (int i = 0; i < getTrainingSet().getDataSet().length; i++) {
+			FeatureObject trainingObject = getTrainingSet().getDataSet()[i];
+			if (getAlpha()[i] != 0) {
+				linearCombination += getAlpha()[i]
+						* trainingObject.getLabel()
+						* JamaUtils.dotproduct(trainingObject.getFeatures(),
+								object.getFeatures());
+			}
+		}
+		return object.getLabel() * (linearCombination + getBias());
 	}
 
 	/**
@@ -53,30 +69,12 @@ public class PrimalPerceptron {
 		}
 	}
 
-	/**
-	 * @param object
-	 * @return The margin for the feature vector of this object with the current
-	 *         weight vector and bias value.
-	 */
-	private double calculateMargin(final FeatureObject object) {
-		return (object.getLabel() * (JamaUtils.dotproduct(object.getFeatures(),
-				getWeight()) + getBias()));
-	}
-
 	public DataSet getTrainingSet() {
 		return trainingSet;
 	}
 
 	public void setTrainingSet(DataSet trainingSet) {
 		this.trainingSet = trainingSet;
-	}
-
-	public Matrix getWeight() {
-		return weight;
-	}
-
-	public void setWeight(Matrix weight) {
-		this.weight = weight;
 	}
 
 	public double getBias() {
@@ -93,6 +91,14 @@ public class PrimalPerceptron {
 
 	public void setR(double r) {
 		this.r = r;
+	}
+
+	public int[] getAlpha() {
+		return alpha;
+	}
+
+	public void setAlpha(int[] alpha) {
+		this.alpha = alpha;
 	}
 
 }
