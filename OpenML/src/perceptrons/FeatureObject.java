@@ -8,8 +8,6 @@ class FeatureObject {
 	
 	private Matrix features;
 	
-	private double similarity;
-	
 	public FeatureObject(final double label, final Matrix features) {
 		assert((label == 1) || (label == -1));
 		this.setLabel(label);
@@ -35,13 +33,4 @@ class FeatureObject {
 	public void setFeatures(Matrix features) {
 		this.features = features;
 	}
-
-	protected double getSimilarity() {
-		return similarity;
-	}
-
-	protected void setSimilarity(double similarity) {
-		this.similarity = similarity;
-	}
-
 }
