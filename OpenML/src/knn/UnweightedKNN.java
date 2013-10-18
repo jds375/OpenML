@@ -69,7 +69,7 @@ public class UnweightedKNN {
 	/**
 	 * Sorts the training set so that it is in ascending order.
 	 */
-	private void sortByMostSimilar() {
+	protected void sortByMostSimilar() {
 		Arrays.sort(trainingSet.getDataSet(), new Comparator<FeatureObject>() {
 			@Override
 			public int compare(FeatureObject arg0, FeatureObject arg1) {
@@ -91,7 +91,7 @@ public class UnweightedKNN {
 	 * 
 	 * @param testObject
 	 */
-	private void computeSimilarities(final FeatureObject testObject) {
+	protected void computeSimilarities(final FeatureObject testObject) {
 		for (int i = 0; i < trainingSet.getDataSet().length; i++) {
 			FeatureObject trainingObject = trainingSet.getDataSet()[i];
 			double similarity = similarityMeasure.getSimilarity(trainingObject,
