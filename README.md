@@ -13,3 +13,7 @@ Current algorithms included:
 -Primal Perceptron
 <br>
 -Dual Perceptron
+<br>
+-Naive Bayes
+<br>
+-Laplace Smoothed Naive Bayes
