@@ -126,3 +126,13 @@ Java Model Exception: Java Model Status [/System/Library/Java/JavaVirtualMachine
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
 !SUBENTRY 1 org.eclipse.jdt.core 4 1006 2013-10-18 03:53:04.343
 !MESSAGE /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Classes/classes.jar is not on its project's build path
+!SESSION 2013-10-27 17:21:02.227 -----------------------------------------------
+eclipse.buildId=4.3.0.I20130605-2000
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/josephsoltzberg/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/josephsoltzberg/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2013-10-27 17:21:19.842
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
