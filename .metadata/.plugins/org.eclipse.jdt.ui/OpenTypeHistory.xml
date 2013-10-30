@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
 <typeInfo handle="=OpenML/src&lt;knn{UnweightedKNN.java[UnweightedKNN" modifiers="1" timestamp="1382065384000"/>
-<typeInfo handle="=OpenML/src&lt;perceptrons{PerceptronTest.java[PerceptronTest" modifiers="1" timestamp="1382079184000"/>
+<typeInfo handle="=OpenML/src&lt;perceptrons{PerceptronTest.java[PerceptronTest" modifiers="1" timestamp="1382082762000"/>
+<typeInfo handle="=OpenML/src&lt;bayes{NaiveBayes.java[NaiveBayes" modifiers="1" timestamp="1382934979000"/>
 </typeInfoHistroy>

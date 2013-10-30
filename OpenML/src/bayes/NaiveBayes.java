@@ -2,6 +2,9 @@ package bayes;
 
 import java.util.HashMap;
 
+import parser.DataSet;
+import parser.FeatureObject;
+
 public class NaiveBayes {
 
 	private DataSet trainingSet;

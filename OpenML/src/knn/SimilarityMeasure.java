@@ -9,7 +9,7 @@ public interface SimilarityMeasure {
 	 * @param object2 - An object to compare against.
 	 * @return The similarity between the two objects.
 	 */
-	public double getSimilarity(final FeatureObject object1,
-			final FeatureObject object2);
+	public double getSimilarity(final FeatureObjectSimilarity object1,
+			final FeatureObjectSimilarity object2);
 
 }

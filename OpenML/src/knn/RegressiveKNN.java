@@ -1,5 +1,7 @@
 package knn;
 
+import parser.DataSet;
+
 public class RegressiveKNN extends UnweightedKNN {
 
 	public RegressiveKNN(DataSet trainingSet, int k,
@@ -8,7 +10,7 @@ public class RegressiveKNN extends UnweightedKNN {
 	}
 
 	@Override
-	public double classify(final FeatureObject testObject) {
+	public double classify(final FeatureObjectSimilarity testObject) {
 		computeSimilarities(testObject);
 		sortByMostSimilar();
 		return predictedLabel();
@@ -21,8 +23,9 @@ public class RegressiveKNN extends UnweightedKNN {
 		double numerator = 0;
 		double denominator = 0;
 		for (int i = 0; i < getK(); i++) {
-			double kNNSimilarity = getTrainingSet().getDataSet()[getTrainingSet()
-					.getDataSet().length - i - 1].getSimilarity();
+			double kNNSimilarity = ((FeatureObjectSimilarity) getTrainingSet()
+					.getDataSet()[getTrainingSet().getDataSet().length - i - 1])
+					.getSimilarity();
 			double kNNLabel = getTrainingSet().getDataSet()[getTrainingSet()
 					.getDataSet().length - i - 1].getLabel();
 			numerator += kNNLabel * kNNSimilarity;

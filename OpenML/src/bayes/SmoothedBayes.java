@@ -1,5 +1,8 @@
 package bayes;
 
+import parser.DataSet;
+import parser.FeatureObject;
+
 public class SmoothedBayes extends NaiveBayes {
 
 	public SmoothedBayes(DataSet trainingSet) {

@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import parser.DataSet;
+import parser.FeatureObject;
 import Jama.Matrix;
 
 public class BayesTest {

@@ -1,5 +1,7 @@
 package perceptrons;
 
+import parser.DataSet;
+import parser.FeatureObject;
 import utils.JamaUtils;
 import Jama.Matrix;
 

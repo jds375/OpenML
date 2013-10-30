@@ -6,7 +6,7 @@ public class EuclideanDistance implements SimilarityMeasure {
 	}
 
 	@Override
-	public double getSimilarity(FeatureObject object1, FeatureObject object2) {
+	public double getSimilarity(FeatureObjectSimilarity object1, FeatureObjectSimilarity object2) {
 		double distance = object1.getFeatures().minus(object2.getFeatures())
 				.normF();
 		if (distance == 0) {

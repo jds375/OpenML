@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
+import parser.DataSet;
 
 public class UnweightedKNN {
 
@@ -17,24 +18,26 @@ public class UnweightedKNN {
 		this.trainingSet = trainingSet;
 		this.k = k;
 		this.similarityMeasure = similarityMeasure;
+		updateDataSet();
 	}
 
 	/**
 	 * @param testObject
 	 * @return The predicted label for a given test instance.
 	 */
-	public double classify(final FeatureObject testObject) {
+	public double classify(final FeatureObjectSimilarity testObject) {
 		computeSimilarities(testObject);
 		sortByMostSimilar();
 		return predictedLabel(createVoteTable());
 	}
-	
+
 	/**
 	 * @param voteTable
 	 * @return The label in the vote table with the most votes.
 	 */
 	private double predictedLabel(final HashMap<Double, Double> voteTable) {
-		Iterator<Entry<Double, Double>> tableIterator = voteTable.entrySet().iterator();
+		Iterator<Entry<Double, Double>> tableIterator = voteTable.entrySet()
+				.iterator();
 		double bestLabel = 0;
 		double mostVotes = 0;
 		while (tableIterator.hasNext()) {
@@ -70,18 +73,20 @@ public class UnweightedKNN {
 	 * Sorts the training set so that it is in ascending order.
 	 */
 	protected void sortByMostSimilar() {
-		Arrays.sort(trainingSet.getDataSet(), new Comparator<FeatureObject>() {
-			@Override
-			public int compare(FeatureObject arg0, FeatureObject arg1) {
-				if (arg0.getSimilarity() > arg1.getSimilarity()) {
-					return 1;
-				} else if (arg0.getSimilarity() < arg1.getSimilarity()) {
-					return -1;
-				} else {
-					return 0;
-				}
-			}
-		});
+		Arrays.sort((FeatureObjectSimilarity[]) trainingSet.getDataSet(),
+				new Comparator<FeatureObjectSimilarity>() {
+					@Override
+					public int compare(FeatureObjectSimilarity arg0,
+							FeatureObjectSimilarity arg1) {
+						if (arg0.getSimilarity() > arg1.getSimilarity()) {
+							return 1;
+						} else if (arg0.getSimilarity() < arg1.getSimilarity()) {
+							return -1;
+						} else {
+							return 0;
+						}
+					}
+				});
 	}
 
 	/**
@@ -91,13 +96,25 @@ public class UnweightedKNN {
 	 * 
 	 * @param testObject
 	 */
-	protected void computeSimilarities(final FeatureObject testObject) {
+	protected void computeSimilarities(final FeatureObjectSimilarity testObject) {
 		for (int i = 0; i < trainingSet.getDataSet().length; i++) {
-			FeatureObject trainingObject = trainingSet.getDataSet()[i];
+			FeatureObjectSimilarity trainingObject = (FeatureObjectSimilarity) trainingSet
+					.getDataSet()[i];
 			double similarity = similarityMeasure.getSimilarity(trainingObject,
 					testObject);
 			trainingObject.setSimilarity(similarity);
 		}
+	}
+
+	private void updateDataSet() {
+		FeatureObjectSimilarity[] updateFeatures = new FeatureObjectSimilarity[trainingSet
+				.getDataSet().length];
+		for (int i = 0; i < updateFeatures.length; i++) {
+			updateFeatures[i] = new FeatureObjectSimilarity(
+					trainingSet.getDataSet()[i].getLabel(),
+					trainingSet.getDataSet()[i].getFeatures());
+		}
+		trainingSet.setDataSet(updateFeatures);
 	}
 
 	public DataSet getTrainingSet() {
@@ -107,7 +124,7 @@ public class UnweightedKNN {
 	public int getK() {
 		return k;
 	}
-	
+
 	public void setK(final int k) {
 		this.k = k;
 	}
